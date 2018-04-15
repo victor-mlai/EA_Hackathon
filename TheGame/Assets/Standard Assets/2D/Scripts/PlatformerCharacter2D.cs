@@ -12,13 +12,15 @@ namespace UnityStandardAssets._2D
         [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
 
         private Transform m_GroundCheck;    // A position marking where to check if the player is grounded.
-        const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
+        const float k_GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
         private bool m_Grounded;            // Whether or not the player is grounded.
         private Transform m_CeilingCheck;   // A position marking where to check for ceilings
         const float k_CeilingRadius = .01f; // Radius of the overlap circle to determine if the player can stand up
         private Animator m_Anim;            // Reference to the player's animator component.
         private Rigidbody2D m_Rigidbody2D;
         private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+
+        public bool isDead = false;
 
         private void Awake()
         {
@@ -51,6 +53,14 @@ namespace UnityStandardAssets._2D
 
         public void Move(float move, bool crouch, bool jump)
         {
+            if (isDead)
+            {
+                m_Anim.SetBool("Crouch", true);
+                m_Anim.SetFloat("Speed", 0);
+                m_Rigidbody2D.velocity.Set(0, 0);
+                return;
+            }
+
             // If crouching, check to see if the character can stand up
             if (!crouch && m_Anim.GetBool("Crouch"))
             {
@@ -95,6 +105,7 @@ namespace UnityStandardAssets._2D
                 // Add a vertical force to the player.
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
+                //m_Rigidbody2D.velocity.Set(m_Rigidbody2D.velocity.x, 0.0f);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             }
         }

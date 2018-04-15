@@ -4,4 +4,19 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Levels/MenuLevel.unity
+    guid: 724647c9cd642f449a478231188e3654
+  - enabled: 1
+    path: Assets/Levels/StartLevel.unity
+    guid: a0d1b4c428fc1484cb3284dc473f851d
+  - enabled: 1
+    path: Assets/Levels/Level2.unity
+    guid: ac3d194e20c77d846be62e511016887e
+  - enabled: 1
+    path: Assets/Levels/sunnyDay.unity
+    guid: 3cf8c0badc849304fb77b7c69dc74ac1
+  - enabled: 1
+    path: Assets/Levels/lastLevel.unity
+    guid: 8efc4e69369300747bc28a0072d80014
